@@ -13,35 +13,28 @@ function App() {
   const [submitted, setSubmitted] = useState(false);
 
   function validate(name, value) {
-    switch (name) {
-      case "name":
-        if (!/^[a-zA-Z\s]+$/.test(value)) {
-          return "Name must contain only letters";
-        }
-        break;
-      case "cardNumber":
-        if (!/^\d{16}$/.test(value.replace(/\s/g, ""))) {
-          return "Card number must be 16 digits";
-        }
-        break;
-      case "month":
-        if (!/^(0?[1-9]|1[0-2])$/.test(value)) {
-          return "Enter valid month (01 - 12)";
-        }
-        break;
-      case "year":
-        if (!/^\d{2}$/.test(value)) {
-          return "Enter a valid 2-digit year";
-        }
-        break;
-      case "cvc":
-        if (!/^\d{3}$/.test(value)) {
-          return "CVC must be 3 digits";
-        }
-        break;
-      default:
-        return "";
+    if (name === "name") {
+      if (!/^[a-zA-Z\s]+$/.test(value)) {
+        return "Name must contain only letters";
+      }
+    } else if (name === "cardNumber") {
+      if (!/^\d{16}$/.test(value.replace(/\s/g, ""))) {
+        return "Card number must be 16 digits";
+      }
+    } else if (name === "month") {
+      if (!/^(0?[1-9]|1[0-2])$/.test(value)) {
+        return "Enter valid month (01 - 12)";
+      }
+    } else if (name === "year") {
+      if (!/^\d{2}$/.test(value)) {
+        return "Enter a valid 2-digit year";
+      }
+    } else if (name === "cvc") {
+      if (!/^\d{3}$/.test(value)) {
+        return "CVC must be 3 digits";
+      }
     }
+
     return "";
   }
 
@@ -85,49 +78,54 @@ function App() {
 
   return (
     <>
-      <div className="bg-[url('/bg-main-mobile.png')] bg-no-repeat h-96 w-full bg-contain"></div>
-      <BackCard formData={formData} />
-      <FrontCard formData={formData} />
-      <Form
-        formData={formData}
-        errors={errors}
-        onHandleChange={handleChange}
-        onSubmit={handleSubmit}
-        submitted={submitted}
-        isFormValid={isFormValid}
-      />
+      <div className="flex items-center">
+        <div className="md:bg-[url('/bg-main-desktop.png')] bg-no-repeat h-[100%] w-full bg-contain bg-[url('/bg-main-mobile.png')]">
+        <BackCard formData={formData} />
+        <FrontCard formData={formData} />
+        </div>
+        <Form
+          formData={formData}
+          errors={errors}
+          onHandleChange={handleChange}
+          onSubmit={handleSubmit}
+          submitted={submitted}
+          isFormValid={isFormValid}
+        />
+      </div>
     </>
   );
 }
 
 function FrontCard({ formData }) {
   return (
-    <div className="flex flex-col justify-between py-7 bg-purple-700 w-[340px] h-[220px] rounded-[10px] px-5 relative bottom-[430px] left-4">
-      <div className="flex items-center gap-4">
+    <div className="bg-[url('./bg-card-front.png')] bg-no-repeat h-screen w-full relative top-110 left-80">
+      <div className="flex items-center gap-4 relative top-6 left-6">
         <div className="h-10 w-10 bg-white rounded-full"></div>
         <div className="h-4 w-4 bg-transparent rounded-full border-2 border-white"></div>
       </div>
-      <div>
-        <p className="font-mono text-white text-[25px]">
+      <div className=" flex flex-col gap-3 relative left-6 top-20">
+        <p className="font-mono text-white text-[35px] ">
           {formData.cardNumber || "0000 0000 0000 0000"}
         </p>
-        <div className="flex justify-between">
+        <div className="flex justify-between items-center w-96 ">
           <p className="text-white">{formData.name || "JANE APPLESEED"}</p>
           <p className="text-white">
             {formData.month || "00"}/{formData.year || "00"}
           </p>
         </div>
       </div>
+      ;
     </div>
   );
 }
 
 function BackCard({ formData }) {
   return (
-    <div className="bg-gray-200 w-[340px] h-[220px] rounded-[10px] relative bottom-[350px] left-13">
-      <div className="bg-black h-[40px] relative top-5"></div>
-      <div className="bg-gray-500 h-[50px] w-[260px] rounded-[10px] px-4 relative top-10 left-10 flex items-center justify-end">
-        <p className="text-white text-[20px]">{formData.cvc || "000"}</p>
+    <div className="bg-[url('./bg-card-back.png')] bg-no-repeat w-full h-screen absolute top-40 left-60">
+      <div className="absolute">
+        <p className="text-white text-[16px] relative top-26 left-93">
+          {formData.cvc || "000"}
+        </p>
       </div>
     </div>
   );
@@ -144,9 +142,8 @@ function Form({
   return (
     <>
       {!submitted ? (
-        <form className="flex flex-col items-left justify-center gap-4 px-8 mt-[-400px] h-[450px]">
-          {/* Name Field */}
-          <div className="flex flex-col font-semibold gap-1 text-[20px]">
+        <form className="flex flex-col gap-4 h-[400px] w-[500px] relative right-70">
+          <div className="flex flex-col font-semibold gap-1 text-[15px]">
             <label>CARDHOLDER NAME</label>
             <input
               type="text"
@@ -164,7 +161,7 @@ function Form({
           </div>
 
           {/* Card Number Field */}
-          <div className="flex flex-col font-semibold gap-1 text-[20px]">
+          <div className="flex flex-col font-semibold gap-1 text-[15px]">
             <label>CARD NUMBER</label>
             <input
               type="text"
@@ -183,7 +180,7 @@ function Form({
           </div>
 
           {/* Month and Year */}
-          <div className="flex font-semibold text-[20px] gap-4">
+          <div className="flex items-center justify-center font-semibold text-[15px] gap-4">
             <div>
               <label>EXP. DATE (MM/YY)</label>
               <div className="flex gap-2 my-2">
@@ -228,7 +225,7 @@ function Form({
                 value={formData.cvc}
                 onChange={onHandleChange}
                 maxLength={3}
-                className={`border h-12 rounded-[10px] px-4 w-40 my-2 outline-0 ${
+                className={`border h-12 rounded-[10px] px-4 w-50 my-2 outline-0 ${
                   errors.cvc ? "border-red-500" : "border-stone-400"
                 }`}
               />
@@ -252,7 +249,7 @@ function Form({
           </button>
         </form>
       ) : (
-        <div className="flex flex-col mt-[-370px] items-center justify-center gap-3 px-6">
+        <div className="flex flex-col items-center justify-center gap-3  h-[400px] w-[500px] relative right-70">
           <img src="/icon-complete.svg" alt="completed-icon" className="w-20" />
           <h3 className="font-semibold text-[30px] text-purple-900">
             Thank you!!!
