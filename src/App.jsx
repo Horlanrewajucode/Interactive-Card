@@ -80,8 +80,8 @@ function App() {
     <>
       <div className="flex items-center">
         <div className="md:bg-[url('/bg-main-desktop.png')] bg-no-repeat h-[100%] w-full bg-contain bg-[url('/bg-main-mobile.png')]">
-        <BackCard formData={formData} />
-        <FrontCard formData={formData} />
+          <BackCard formData={formData} />
+          <FrontCard formData={formData} />
         </div>
         <Form
           formData={formData}
@@ -114,7 +114,6 @@ function FrontCard({ formData }) {
           </p>
         </div>
       </div>
-      ;
     </div>
   );
 }
