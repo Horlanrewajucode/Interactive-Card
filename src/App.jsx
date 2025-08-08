@@ -98,7 +98,7 @@ function App() {
 
 function FrontCard({ formData }) {
   return (
-    <div className="bg-[url('./bg-card-front.png')] md:bg-[url('./bg-card-front.png')] lg:bg-[url('./bg-card-front.png')] md:h-screen md:w-full lg:h-screen lg:w-full bg-no-repeat h-screen w-full relative top-110 left-80 z-50">
+    <div className="bg-[url('/bg-card-front.png')] md:bg-[url('/bg-card-front.png')] lg:bg-[url('/bg-card-front.png')] md:h-screen md:w-full lg:h-screen lg:w-full bg-no-repeat h-screen w-full relative top-110 left-80 z-50">
       <div className="flex items-center gap-4 relative top-6 left-6">
         <div className="h-10 w-10 bg-white rounded-full"></div>
         <div className="h-4 w-4 bg-transparent rounded-full border-2 border-white"></div>
@@ -120,7 +120,7 @@ function FrontCard({ formData }) {
 
 function BackCard({ formData }) {
   return (
-    <div className="bg-[url('./bg-card-back.png')] md:bg-[url('./bg-card-back.png')] lg:bg-[url('./bg-card-back.png')] md:h-screen lg:h-screen lg:w-full md:w-full bg-no-repeat w-full h-screen absolute top-40 left-60 z-50">
+    <div className="bg-[url('/bg-card-back.png')] md:bg-[url('/bg-card-back.png')] lg:bg-[url('/bg-card-back.png')] md:h-screen lg:h-screen lg:w-full md:w-full bg-no-repeat w-full h-screen absolute top-40 left-60 z-50">
       <div className="absolute">
         <p className="text-white text-[16px] relative top-26 left-93">
           {formData.cvc || "000"}
